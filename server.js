@@ -31,6 +31,13 @@ const hotelsController = require('./controllers/hotels.js')
 app.use('/hotel', hotelsController)
 
 
+const reviewsController = require('./controllers/reviews.js')
+app.use('/review', reviewsController)
+
+
+const usersController = require('./controllers/users.js')
+app.use('/user', usersController)
+
 
 
 
