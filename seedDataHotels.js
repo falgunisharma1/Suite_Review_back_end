@@ -71,7 +71,11 @@ const seedDataHotels =
         city: 'Breckenridge',
         address: '555 Ski Slope Way',
         description: 'Cozy up by the fireplace after a day on the slopes.',
-        images: ['https://example.com/image11.jpg', 'https://example.com/image12.jpg'],
+        images: [
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/114530236.jpg?k=c6935325f42c2db5c9b1383f617048969b3150ae72730dc89c5b43d10085d553&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/254207675.jpg?k=ab7869a916080019f5aa66b876505d9ba1997822fe4f2911e7018c8167cbf454&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/219731102.jpg?k=ec4e2ff65d2da734cd76201aeca1705231c60f1973ada08b9cfbc0f9c267ebb8&o=&hp=1'
+        ],
         hotel_Id: 5
     },
     {
@@ -80,7 +84,11 @@ const seedDataHotels =
         city: 'Honolulu',
         address: '777 Beachfront Avenue',
         description: 'Experience paradise on the shores of Waikiki.',
-        images: ['https://example.com/image13.jpg', 'https://example.com/image14.jpg'],
+        images: [
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/453283224.jpg?k=e5143c4499dbb0de6be4c6445228babcc0bfc5e65be00ce79cc34d92178cfa26&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/480990159.jpg?k=03d41c88c01ccc7e95f486dd675c51eb3c66f24d0ae25e48fe2a93249840868d&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/480990173.jpg?k=007050624a5aae5077b9289e1336559e3a92f7981f501552552d6607bc4de01f&o=&hp=1'
+        ],
         hotel_Id: 6
     },
     {
@@ -89,7 +97,10 @@ const seedDataHotels =
         city: 'New York City',
         address: '888 Broadway',
         description: 'Stay in the heart of the city that never sleeps.',
-        images: ['https://example.com/image15.jpg', 'https://example.com/image16.jpg'],
+        images: [
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/444553072.jpg?k=281090df15cd299849c196fe5ab224c63acb64f7876c2c61abb04fee01fe7c14&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/444553079.jpg?k=626827192604f153a11e6b8e6bdd9bd71fc5ebf0d96a9abf338c5357c33571e4&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/430871718.jpg?k=578ed192b85f0c59ff136684df248a754df69380a721c85914db5a7837469bb7&o=&hp=1'],
         hotel_Id: 7
     },
     {
@@ -98,7 +109,11 @@ const seedDataHotels =
         city: 'Portland',
         address: '999 Riverside Drive',
         description: 'Relax by the tranquil riverbank surrounded by nature.',
-        images: ['https://example.com/image17.jpg', 'https://example.com/image18.jpg'],
+        images: [
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/430819783.jpg?k=2a034c3664de4de7b22a83403b310e55f6b351fe3553497d0ab473f6074642cc&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/430819780.jpg?k=ff5eed81d2b4a9686b2c8f98f874aba25eb3afd3b3f92f63f1d9d979c93786c6&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/538608228.jpg?k=0402362dd4c60c01051d3eadf7ac78e1a9e4a4ea2dd97c117a277358ba336285&o=&hp=1'
+        ],
         hotel_Id: 8
     },
     {
@@ -107,7 +122,13 @@ const seedDataHotels =
         city: 'Scottsdale',
         address: '123 Desert Road',
         description: 'Escape to the luxurious desert oasis and spa.',
-        images: ['https://example.com/image19.jpg', 'https://example.com/image20.jpg'],
+        images: [
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/501412019.jpg?k=8f42eb9d6b1bace0fb2b9e487a4cf13bb37bbcb9eda64e3b2d94843754472a5d&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/480760073.jpg?k=42f9e02f9dabb749de9579e119361ea1b40dcb822e02a2c6e7fc568f7fa9c3b9&o=&hp=1', 
+            'https://cf.bstatic.com/xdata/images/hotel/max1024x768/526444569.jpg?k=bfdea5535f168de3742e93475bb6ef41f883d2dd01ce3d4a919ffa6f4f2f2c7d&o=&hp=1'
+        ],
         hotel_Id: 9
     }
-];
+]
+
+module.exports  = seedDataHotels

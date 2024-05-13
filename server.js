@@ -8,7 +8,13 @@ const cors = require("cors")
 
 require('dotenv').config()
 
+const mongoose = require('mongoose')
+const db = mongoose.connection
+
 const PORT = process.env.PORT || 4000;
+const mongoURI = process.env.MONGODB_URI
+
+const morgan = require('morgan')
 
 
 
@@ -19,7 +25,7 @@ app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
-
+app.use(morgan('dev'))
 
 
 // =======================================
@@ -28,15 +34,15 @@ app.use(cors())
 
 
 const hotelsController = require('./controllers/hotels.js')
-app.use('/hotel', hotelsController)
+app.use('/hotels', hotelsController)
 
 
 const reviewsController = require('./controllers/reviews.js')
-app.use('/review', reviewsController)
+app.use('/reviews', reviewsController)
 
 
 const usersController = require('./controllers/users.js')
-app.use('/user', usersController)
+app.use('/users', usersController)
 
 
 
@@ -47,3 +53,14 @@ app.use('/user', usersController)
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`)
   })
+
+  // Connect to Mongo
+mongoose.connect(mongoURI)
+.then(()=> {
+    console.log('the connection to mongod is established')
+})
+
+// Error / success
+db.on('error', (err) => console.log(err.message + ' is Mongod not running?'))
+db.on('connected', () => console.log('mongo connected: ', mongoURI))
+db.on('disconnected', () => console.log('mongo disconnected'))

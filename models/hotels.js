@@ -31,7 +31,7 @@ const hotelSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-});
+})
 
 const Hotel = mongoose.model('Hotel', hotelSchema)
 

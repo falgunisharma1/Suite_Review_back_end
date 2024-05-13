@@ -20,7 +20,7 @@ rating: {
     max: [10, 'Needs to be between 1 and 10']
 },
 description: {
-    type: string, 
+    type: String, 
     required: true
 },
 images: [String]
