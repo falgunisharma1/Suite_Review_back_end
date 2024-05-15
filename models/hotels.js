@@ -30,6 +30,9 @@ const hotelSchema = new mongoose.Schema({
     hotel_Id: {
         type: Number,
         required: true
+    },
+    ave_rating:{
+        type: Number
     }
 })
 

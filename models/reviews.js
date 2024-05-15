@@ -24,7 +24,6 @@ description: {
     required: true
 },
 images: [String]
-
 })
 
 const Review = mongoose.model('Review', reviewSchema)

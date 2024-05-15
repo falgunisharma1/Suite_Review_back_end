@@ -7,7 +7,8 @@ const Schema = mongoose.Schema
 const userSchema = new mongoose.Schema({
     userName: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     firstName: {
         type: String,
@@ -25,7 +26,8 @@ const userSchema = new mongoose.Schema({
     },
     user_Id: {
         type: Number,
-        required: true
+        required: true,
+        unique: true,
     }
 })
 

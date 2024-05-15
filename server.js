@@ -13,8 +13,11 @@ const db = mongoose.connection
 
 const PORT = process.env.PORT || 4000;
 const mongoURI = process.env.MONGODB_URI
+const SECRET = process.env.TOKEN_SECRET
 
 const morgan = require('morgan')
+
+const jwt = require('jsonwebtoken')
 
 
 
