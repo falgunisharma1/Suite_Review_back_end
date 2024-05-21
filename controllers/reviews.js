@@ -28,6 +28,8 @@ const authenticate = require('../middlewares/authentication.js')
 //______________________________________________________________________________________
 // Index     /reviews/               GET         returns all reviews
 // Show      /reviews/:hotel_ID      GET         returns list of reviews for particular hotel
+// Show      /reviews/user/:user_ID  GET         returns list of reviews for particular user
+// Show      /reviews/review/:id     GET         returns one review
 // Create    /reviews/:hotel_ID      POST        create new review
 // Update    /reviews/:id            PUT         updates a particular review
 // Delete    /reviews/:id            DELETE      updates a particular review
@@ -35,10 +37,10 @@ const authenticate = require('../middlewares/authentication.js')
 
 // Index Route
 
-router.get('/', authenticate, async (req, res) => {
+router.get('/', async (req, res) => {
     
     try{
-        const foundReviews = await Review.find({user_Id:req.user_Id}) 
+        const foundReviews = await Review.find({}) 
         res.json(foundReviews)
         console.log(foundReviews)
     } catch (error){
@@ -60,6 +62,41 @@ router.get('/:hotel_id', async (req, res) => {
     
     console.log('in get')
     const foundReviews = await Review.find({hotel_Id: Number(req.params.hotel_id)})
+    
+    console.log(foundReviews)
+    
+    try{
+    res.json(foundReviews)
+    } catch (error){
+        res.status(400).json(error)
+    }
+
+})
+
+
+// Show Route One specific Review
+
+router.get('/review/:id', async (req, res) => {
+    
+    console.log('in get')
+    const foundReview = await Review.findById(req.params.id)
+    
+    console.log(foundReview)
+    
+    try{
+    res.json(foundReview)
+    } catch (error){
+        res.status(400).json(error)
+    }
+
+})
+
+// Show Route List of reviews for specific Hotel
+
+router.get('/user/:user_id', async (req, res) => {
+    
+    console.log('in get')
+    const foundReviews = await Review.find({user_Id: Number(req.params.user_id)})
     
     console.log(foundReviews)
     

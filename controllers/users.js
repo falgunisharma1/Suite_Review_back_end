@@ -38,12 +38,12 @@ const authenticate = require('../middlewares/authentication.js')
 // ==========
 
 
-router.get('/', authenticate, async (req, res) => {
+router.get('/', async (req, res) => {
     console.log("in get")
-    console.log(req.user_Id)
+
     //const auth = req.user
     //Send back everything but the password
-    const foundUser = await User.find({user_Id:req.user_Id}) .select('-password')
+    const foundUser = await User.find({}) .select('-password')
     
     console.log(foundUser)
 
@@ -108,10 +108,10 @@ router.get('/seed', async (req, res) => {
 
 //id is supposed to come from token
 
-router.get('/profile', async (req, res) => {
+router.get('/profile/:id', async (req, res) => {
     
     console.log('in get')
-    const foundUser = await User.findById(req.body.id).select('-password')
+    const foundUser = await User.find({user_Id: Number(req.params.id)}).select('-password')
     
     console.log(foundUser)
     console.log('after')
