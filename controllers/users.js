@@ -28,7 +28,7 @@ const authenticate = require('../middlewares/authentication.js')
 // Action    URL                   HTTP Verb     Explaination
 //______________________________________________________________________________________
 // Index     /users/                 GET         returns all users
-// Show      /users/profile          GET         returns particular user
+// Show      /users/profile/:id      GET         returns particular user
 // Create    /users/new              POST        create new user
 // LogIn     /users/login            POST        already user
 
@@ -142,7 +142,7 @@ router.get('/profile/:id', async (req, res) => {
 // Login Route
 // ==========
 
-router.post('/login', async (req, res) => {
+router.put('/login', async (req, res) => {
     
     //incoming json: userName, password
 
@@ -181,11 +181,12 @@ router.post('/login', async (req, res) => {
         lastName: foundUser.lastName,
         userImage: foundUser.images,
         description: foundUser.description,
-        token: jwt.sign(
-            {id: foundUser.user_Id},
-            SECRET,
-            {expiresIn: '60d'}
-        )
+        user_Id:foundUser.user_Id
+        // token: jwt.sign(
+        //     {id: foundUser.user_Id},
+        //     SECRET,
+        //     {expiresIn: '60d'}
+        //)
         //jwt.sign(payload, secretOrPrivateKey, [options, callback])
     }
 
@@ -253,15 +254,16 @@ router.post('/new', async (req, res) => {
         const newObj = {
     
             _id: userMondoID,
+            user_Id: newAccount.user_Id,
             userName: newAccount.userName,
             firstName: newAccount.firstName,
             lastName: newAccount.lastName,
             userImage: newAccount.images,
             description: newAccount.description,
-            token: jwt.sign(
-                {id: newAccount.user_Id},
-                SECRET,
-                {expiresIn: '60d'})
+            // token: jwt.sign(
+            //     {id: newAccount.user_Id},
+            //     SECRET,
+            //     {expiresIn: '60d'})
         }
         
         //jwt.sign(payload, secretOrPrivateKey, [options, callback])

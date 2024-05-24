@@ -16,8 +16,8 @@ user_Id: {
 rating: {
     type: Number, 
     required: true,
-    min: [0, 'Needs to be between 1 and 10'],
-    max: [10, 'Needs to be between 1 and 10']
+    min: [1, 'Needs to be between 1 and 5'],
+    max: [5, 'Needs to be between 1 and 5']
 },
 description: {
     type: String, 
