@@ -275,7 +275,7 @@ router.post('/new', async (req, res) => {
             userName: newAccount.userName,
             firstName: newAccount.firstName,
             lastName: newAccount.lastName,
-            userImage: newAccount.images,
+            userImage: newAccount.userImage,
             description: newAccount.description,
             // token: jwt.sign(
             //     {id: newAccount.user_Id},
