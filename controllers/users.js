@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
 
     //const auth = req.user
     //Send back everything but the password
-    const foundUser = await User.find({}) .select('-password')
+    const foundUser = await User.find({}).select('-password')
     
     console.log(foundUser)
 
@@ -152,6 +152,8 @@ router.put('/login', async (req, res) => {
     
     console.log(foundUser)
 
+    const userExists = foundUser? true:false
+
     //compare incoming userName address to database
         /*
         bcrypt.compareSync('yourGuessHere', hashedString) 
@@ -161,9 +163,16 @@ router.put('/login', async (req, res) => {
 
       
     //const hashP = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+    
+    let passwordMatch = false //if bad info
 
     
-    const passwordMatch =  bcrypt.compareSync(req.body.password, foundUser.password)
+    if(userExists){
+
+        passwordMatch =  bcrypt.compareSync(req.body.password, foundUser.password)
+
+    }
+    //const passwordMatch =  bcrypt.compareSync(req.body.password, foundUser.password)
     //const passwordMatch =   await bcrypt.compare(req.body.password, foundUser.password)
     
     // const passwordMatch = await bcrypt.compare(req.body.password, foundUser.password).then(function(result) {
@@ -183,29 +192,38 @@ router.put('/login', async (req, res) => {
 
     //Check is both password and userName are valid
     
-    const bothValid = (foundUser &&  passwordMatch)
+    const bothValid = (userExists &&  passwordMatch)
     console.log("pw: "+passwordMatch+ " "+ req.body.password)
     console.log("bothValid: "+ bothValid)
 
-    const userMondoID = foundUser._id
+    //const userMondoID = foundUser._id
     //Send back everything but the password
 
-    const newObj = {
+    
+    let newObj = {} //if bad info
 
-        _id: userMondoID,
-        userName: foundUser.userName,
-        firstName: foundUser.firstName,
-        lastName: foundUser.lastName,
-        userImage: foundUser.userImage,
-        description: foundUser.description,
-        user_Id:foundUser.user_Id
-        // token: jwt.sign(
-        //     {id: foundUser.user_Id},
-        //     SECRET,
-        //     {expiresIn: '60d'}
-        //)
-        //jwt.sign(payload, secretOrPrivateKey, [options, callback])
+    if(bothValid){
+
+        const userMondoID = foundUser._id
+
+        newObj = {
+
+            _id: userMondoID,
+            userName: foundUser.userName,
+            firstName: foundUser.firstName,
+            lastName: foundUser.lastName,
+            userImage: foundUser.userImage,
+            description: foundUser.description,
+            user_Id:foundUser.user_Id
+            // token: jwt.sign(
+            //     {id: foundUser.user_Id},
+            //     SECRET,
+            //     {expiresIn: '60d'}
+            //)
+            //jwt.sign(payload, secretOrPrivateKey, [options, callback])
+        }
     }
+    
 
     //If bothValid is true, send Json to the front-end
 
@@ -240,7 +258,7 @@ router.post('/new', async (req, res) => {
     //incoming json required: 
 
     const userName = req.body.userName 
-    const password = req.body.password ? bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)) : false
+    const password = req.body.password ? bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)) : null
     const lastName = req.body.lastName 
     const firstName = req.body.firstName 
 
