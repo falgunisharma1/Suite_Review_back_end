@@ -77,7 +77,7 @@ router.get('/:id', async (req, res) => {
 
     const hotelReviews = await Review.aggregate([{$group: {_id:"$hotel_Id", ave_rating:{$avg:"$rating"}}}])
 
-    console.log(hotelReviews)
+    //console.log(hotelReviews)
     
 
 
@@ -87,14 +87,14 @@ router.get('/:id', async (req, res) => {
 
                 foundHotel["ave_rating"] = Math.round(hotelReviews[j]["ave_rating"]*100)/100 // round to 2 dec
 
-                console.log(foundHotel["ave_rating"])
+               // console.log(foundHotel["ave_rating"])
 
 
             }
         }
 
     
-    console.log(foundHotel)
+    //console.log(foundHotel)
     
     try{
     res.json(foundHotel)

@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
     try{
         const foundReviews = await Review.find({}) 
         res.json(foundReviews)
-        console.log(foundReviews)
+        //console.log(foundReviews)
     } catch (error){
         res.status(400).json(error)
     }

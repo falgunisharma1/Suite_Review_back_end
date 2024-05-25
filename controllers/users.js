@@ -74,13 +74,13 @@ router.get('/', async (req, res) => {
 // ==========
 
      //const hashedString = bcrypt.hashSync('yourStringHere', bcrypt.genSaltSync(10))   
-for( i=0;i<userSeeds.length;i++){
+// for( i=0;i<userSeeds.length;i++){
 
-    let hashP = bcrypt.hashSync(userSeeds[i]['password'] , bcrypt.genSaltSync(10))
+//     let hashP = bcrypt.hashSync(userSeeds[i]['password'] , bcrypt.genSaltSync(10))
 
-    userSeeds[i]['password'] = hashP
+//     userSeeds[i]['password'] = hashP
 
-}
+// }
 
 
 router.get('/seed', async (req, res) => {
@@ -146,6 +146,7 @@ router.put('/login', async (req, res) => {
     
     //incoming json: userName, password
 
+    console.log(req.body)
     //search by userName
     const foundUser = await User.findOne({'userName':req.body.userName})
     
@@ -160,9 +161,25 @@ router.put('/login', async (req, res) => {
 
       
     //const hashP = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
- 
-    const passwordMatch =  bcrypt.compare(req.body.password, foundUser.password)
+
     
+    const passwordMatch =  bcrypt.compareSync(req.body.password, foundUser.password)
+    //const passwordMatch =   await bcrypt.compare(req.body.password, foundUser.password)
+    
+    // const passwordMatch = await bcrypt.compare(req.body.password, foundUser.password).then(function(result) {
+    //     // result == false
+    //     result==true
+    // });
+
+    // const checkbycrypt = async (password)=>{
+
+    //     const match = await bcrypt.compare(password, foundUser.password)
+    //     return match
+    // }
+    
+    // const passwordMatch = checkbycrypt(req.body.password)
+
+    //const passwordMatch = await bcrypt.compare(req.body.password, foundUser.password) ? true:false
 
     //Check is both password and userName are valid
     
@@ -179,7 +196,7 @@ router.put('/login', async (req, res) => {
         userName: foundUser.userName,
         firstName: foundUser.firstName,
         lastName: foundUser.lastName,
-        userImage: foundUser.images,
+        userImage: foundUser.userImage,
         description: foundUser.description,
         user_Id:foundUser.user_Id
         // token: jwt.sign(
@@ -204,8 +221,8 @@ router.put('/login', async (req, res) => {
   
     } else {
 
-        res.status(400)
-        throw new Error('Something is not correct with Validation')
+        res.status(400).json('Something is not correct with Validation')
+        //throw new Error('Something is not correct with Validation')
     }
 
 })
@@ -277,8 +294,8 @@ router.post('/new', async (req, res) => {
 
 
     }else {
-        res.status(400)
-        throw new Error('Failed new user checks')
+        res.status(400).json('Failed new user checks')
+        //throw new Error('Failed new user checks')
     }
 
     
