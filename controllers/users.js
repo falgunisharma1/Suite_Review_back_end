@@ -6,15 +6,6 @@ const router = express.Router()
 const User = require('../models/users.js')
 const userSeeds = require('../seedDataUsers.js')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const SECRET = process.env.TOKEN_SECRET
-
-
-// =======================================
-//              MIDDLEWARE
-// =======================================
-
-const authenticate = require('../middlewares/authentication.js')
 
 
 
@@ -41,25 +32,12 @@ const authenticate = require('../middlewares/authentication.js')
 router.get('/', async (req, res) => {
     console.log("in get")
 
-    //const auth = req.user
+
     //Send back everything but the password
     const foundUser = await User.find({}).select('-password')
     
     console.log(foundUser)
 
-
-    //Send back everything but the password
-
-    // const newObj = {
-
-    //     _id: foundUsers.id,
-    //     userName: foundUsers.userName,
-    //     firstName: foundUsers.firstName,
-    //     lastName: foundUsers.lastName,
-    //     userImage: foundUsers.images,
-    //     description: foundUsers.description
-
-    // }
     
     try{
         res.json(foundUser) 
@@ -73,14 +51,7 @@ router.get('/', async (req, res) => {
 // Add Seeds Route
 // ==========
 
-     //const hashedString = bcrypt.hashSync('yourStringHere', bcrypt.genSaltSync(10))   
-// for( i=0;i<userSeeds.length;i++){
 
-//     let hashP = bcrypt.hashSync(userSeeds[i]['password'] , bcrypt.genSaltSync(10))
-
-//     userSeeds[i]['password'] = hashP
-
-// }
 
 
 router.get('/seed', async (req, res) => {
@@ -118,16 +89,6 @@ router.get('/profile/:id', async (req, res) => {
 
     //Send back everything but the password
 
-    // const newObj = {
-
-    //     _id: foundUser.id,
-    //     userName: foundUser.userName,
-    //     firstName: foundUser.firstName,
-    //     lastName: foundUser.lastName,
-    //     userImage: foundUser.images,
-    //     description: foundUser.description
-
-    // }
     
     try{
     res.json(foundUser)
@@ -154,14 +115,6 @@ router.put('/login', async (req, res) => {
 
     const userExists = foundUser? true:false
 
-    //compare incoming userName address to database
-        /*
-        bcrypt.compareSync('yourGuessHere', hashedString) 
-        
-        returns true or false
-        */
-
-      
     //const hashP = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
     
     let passwordMatch = false //if bad info
@@ -172,23 +125,7 @@ router.put('/login', async (req, res) => {
         passwordMatch =  bcrypt.compareSync(req.body.password, foundUser.password)
 
     }
-    //const passwordMatch =  bcrypt.compareSync(req.body.password, foundUser.password)
-    //const passwordMatch =   await bcrypt.compare(req.body.password, foundUser.password)
-    
-    // const passwordMatch = await bcrypt.compare(req.body.password, foundUser.password).then(function(result) {
-    //     // result == false
-    //     result==true
-    // });
 
-    // const checkbycrypt = async (password)=>{
-
-    //     const match = await bcrypt.compare(password, foundUser.password)
-    //     return match
-    // }
-    
-    // const passwordMatch = checkbycrypt(req.body.password)
-
-    //const passwordMatch = await bcrypt.compare(req.body.password, foundUser.password) ? true:false
 
     //Check is both password and userName are valid
     
@@ -196,7 +133,7 @@ router.put('/login', async (req, res) => {
     console.log("pw: "+passwordMatch+ " "+ req.body.password)
     console.log("bothValid: "+ bothValid)
 
-    //const userMondoID = foundUser._id
+
     //Send back everything but the password
 
     
@@ -215,12 +152,7 @@ router.put('/login', async (req, res) => {
             userImage: foundUser.userImage,
             description: foundUser.description,
             user_Id:foundUser.user_Id
-            // token: jwt.sign(
-            //     {id: foundUser.user_Id},
-            //     SECRET,
-            //     {expiresIn: '60d'}
-            //)
-            //jwt.sign(payload, secretOrPrivateKey, [options, callback])
+
         }
     }
     
@@ -240,7 +172,7 @@ router.put('/login', async (req, res) => {
     } else {
 
         res.status(400).json('Something is not correct with Validation')
-        //throw new Error('Something is not correct with Validation')
+
     }
 
 })
@@ -295,13 +227,10 @@ router.post('/new', async (req, res) => {
             lastName: newAccount.lastName,
             userImage: newAccount.userImage,
             description: newAccount.description,
-            // token: jwt.sign(
-            //     {id: newAccount.user_Id},
-            //     SECRET,
-            //     {expiresIn: '60d'})
+
         }
         
-        //jwt.sign(payload, secretOrPrivateKey, [options, callback])
+
 
         try{   
             res.json(newObj)
@@ -313,7 +242,7 @@ router.post('/new', async (req, res) => {
 
     }else {
         res.status(400).json('Failed new user checks')
-        //throw new Error('Failed new user checks')
+
     }
 
     

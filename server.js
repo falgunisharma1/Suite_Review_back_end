@@ -3,7 +3,7 @@
 // =======================================
 const express = require('express')
 const app = express()
-//const methodOverride = require('method-override');
+
 
 const cors = require("cors")
 
@@ -14,11 +14,10 @@ const db = mongoose.connection
 
 const PORT = process.env.PORT || 4000;
 const mongoURI = process.env.MONGODB_URI
-const SECRET = process.env.TOKEN_SECRET
+
 
 const morgan = require('morgan')
 
-const jwt = require('jsonwebtoken')
 
 
 
@@ -28,7 +27,6 @@ const jwt = require('jsonwebtoken')
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-//app.use(methodOverride('_method'))
 app.use(cors())
 app.use(morgan('dev'))
 

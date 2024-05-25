@@ -10,12 +10,6 @@ const reviewSeeds = require('../seedDataReviews.js')
 
 
 
-// =======================================
-//              MIDDLEWARE
-// =======================================
-
-const authenticate = require('../middlewares/authentication.js')
-
 
 
 // =======================================
@@ -49,6 +43,7 @@ router.get('/', async (req, res) => {
 
     })
 
+    
 // Add Seeds Route
 
 router.get('/seed', async (req, res) => {
